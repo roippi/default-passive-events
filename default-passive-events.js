@@ -13,6 +13,12 @@
     };
 
     EventTarget.prototype.addEventListener = function(type, listener, options) {
+      const validTypes = ['scroll', 'touchstart', 'touchmove'];
+
+      if (!validTypes.includes(type)) {
+        superMethod.call(this, type, listener, options);
+        return;
+      }
       var usesListenerOptions = typeof options === 'object';
       var useCapture = usesListenerOptions ? options.capture : options;
 
